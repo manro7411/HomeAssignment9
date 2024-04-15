@@ -4,7 +4,7 @@ defmodule MessagePassingSystem.Client do
   end
 
   defp loop(server_ip, port, name) do
-    {:ok, socket} = :gen_tcp.connect(server_ip, port, [:binary])
+    {:ok, socket} = :gen_tcp.connect({127, 0, 0, 1}, port, [:binary, {:active, true}])
     IO.puts("Connected to server.")
     send_message(socket, name <> ": Connected.")
     receive_messages(socket)
